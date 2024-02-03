@@ -2,6 +2,7 @@ import React from 'react';
 import Forecast from './components/forecast.jsx';
 import Header from './components/header.jsx';
 import Search from './components/search.jsx';
+import HourForecast from './components/hourForecast.jsx';
 
 class App extends React.Component {
   constructor(props){
@@ -45,6 +46,7 @@ class App extends React.Component {
       <Header />
       <Search onSearch={this.searchCity} />
       <Forecast data ={this.state.data} />
+      <HourForecast data ={this.state.data}/>
     </div>
     );
   }
