@@ -1,42 +1,43 @@
-import React from 'react';
-import "../styles/hourForecast.css"
+import React, { useEffect, useState } from 'react';
+import Card from './card';
+import "../styles/hourForecast.css";
 
 let date = new Date();
+let time = date.getHours();
+const HourForecast = (props) => {
+  const [cards, setCards] = useState([]);
 
-let hours = ["00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
-
-class HourForecast extends React.Component{
-  constructor(props){
-    super(props)
-  }
-  getTime(){
-    let last_updated = this.props.data?.current?.last_updated;
-    if(last_updated){
-      let dateTime;
-      let stringArr = last_updated.split(" ");
-      let date = stringArr[0];
-      let time = stringArr[1].split(":");
-      time[1] = ":00";
-      dateTime = date + " " + time[0] + time[1];
-      console.log(dateTime);
-      return dateTime;
-    }
-    
-  }
-  render(){
-    let time= this.getTime();
-    let card
-    let month = Number(date.getMonth()) < 9? "0" + date.getMonth() : date.getMonth();
-    let day = Number(date.getDate()) < 9 ? "0" + date.getDate() : date.getDate();
-    for(let i = 0; i < 24; i++){
-      if(time === this.props.data?.forecast?.forecastday?.[0]?.hour?.[i].time){
-        return(<div id='hourForecast'>
-          <p>Forecast</p>
-          <div>{month}.{day}</div>
-        </div>);
+  useEffect(() => {
+    const newCards = [];
+    let count = 0;
+    for (let i = new Date().getHours(); i <= 24 && count < 24; i++) {
+      if (count === 24) {
+        break;
       }
+      if (i < 24) {
+        newCards.push(<Card key={count} number={i} hour={props.hour} hourNextDay={props.hourNextDay} day={0} />);
+        count++;
+      } else {
+        for (let j = 0; j < 24; j++) {
+          if (count === 24) {
+            break;
+          }
+          newCards.push(<Card key={count} number={j} hour={props.hour} hourNextDay={props.hourNextDay} day={1} />);
+          count++;
+        }
+
+      }
+
     }
-    
-  }
+    setCards(newCards);
+  }, [props.hour, props.hourNextDay]);
+
+  return (
+    <div>
+      <p className='hourForecast-paragraph'>Forecast</p>
+      <div id='hourForecast'>{cards}</div>
+    </div>
+  );
 }
+
 export default HourForecast;
