@@ -1,4 +1,17 @@
 #hourForecast{
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.card{
   color: white;
   font-size: 20px;
+}
+.hourForecast-paragraph{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  font-weight: 500;
+  font-size: 32px;
 }
