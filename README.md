@@ -1,3 +1,3 @@
 # Weather App
 
-Первый pet проект
+My first pet project
