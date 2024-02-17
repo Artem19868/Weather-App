@@ -48,8 +48,7 @@ class App extends React.Component {
         console.error('Error fetching forecast data:', error);
       });
   };
-
-
+  
   componentDidMount() {
     this.getMyLocation();
   }

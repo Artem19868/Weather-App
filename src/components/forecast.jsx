@@ -14,7 +14,6 @@ class Forecast extends React.Component{
   }
   
   render(){
-    console.log(this.props.data);
     return(<div id='forecast'>
       <div className='location'>{this.props.data?.location?.name}, {this.props.data?.location?.country}</div>
       <div className='date'>{dayOfWeek} {day} {Month}</div>
